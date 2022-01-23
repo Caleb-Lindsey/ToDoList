@@ -14,12 +14,24 @@ struct AddToDoItemView: View {
     @State private var title = ""
     @State private var isShowingAlert = false
     @State private var alertTitle = ""
+    @State private var priority = 0
     
     var body: some View {
         NavigationView {
             Form {
                 Section {
                     TextField("Title", text: $title)
+                }
+                
+                Section {
+                    Picker("Priority", selection: $priority) {
+                        ForEach(0..<Priority.allCases.count) { index in
+                            Text(Priority.allCases[index].title)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                } header: {
+                    Text("Priority")
                 }
             }
             .navigationTitle("ToDo Item")
@@ -46,6 +58,8 @@ struct AddToDoItemView: View {
         newItem.id = UUID()
         newItem.title = title
         newItem.createdAt = Date()
+        newItem.priority = Priority.getPriority(from: priority)
+        newItem.state = .notStarted
         
         do {
             try moc.save()

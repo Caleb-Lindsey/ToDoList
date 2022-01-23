@@ -22,7 +22,7 @@ struct ToDoItemsView: View {
             List {
                 Section {
                     ForEach(toDoItems) { item in
-                        Text(item.title ?? "Unknown")
+                        Text(item.title)
                     }
                     .onDelete(perform: delete)
                 } header: {
