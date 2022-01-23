@@ -44,6 +44,7 @@ struct ToDoItemsView: View {
                 AddToDoItemView()
             }
         }
+        .navigationViewStyle(.stack)
         .alert(alertTitle, isPresented: $isShowingAlert) {
             Button("OK", role: .cancel) { }
         }
