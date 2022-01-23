@@ -30,6 +30,12 @@ import CoreData
         }
     }
     
+    init?(_ integer: Int) {
+        guard 0..<Priority.allCases.count ~= integer else { return nil }
+        
+        self.init(rawValue: Int32(integer))
+    }
+    
     static func getPriority(from integer: Int) -> Priority {
         switch integer {
         case 0:

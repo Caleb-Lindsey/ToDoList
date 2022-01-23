@@ -8,13 +8,12 @@
 import SwiftUI
 
 struct AddToDoItemView: View {
-    @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) var dismiss
     
     @State private var title = ""
-    @State private var isShowingAlert = false
-    @State private var alertTitle = ""
-    @State private var priority = 0
+    @State private var priorityValue = 0
+    
+    private let addTodoVM = AddTodoViewModel()
     
     var body: some View {
         NavigationView {
@@ -24,7 +23,7 @@ struct AddToDoItemView: View {
                 }
                 
                 Section {
-                    Picker("Priority", selection: $priority) {
+                    Picker("Priority", selection: $priorityValue) {
                         ForEach(0..<Priority.allCases.count) { index in
                             Text(Priority.allCases[index].title)
                         }
@@ -42,37 +41,19 @@ struct AddToDoItemView: View {
                     }
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Save") {
-                        add()
+                    Button(action: add) {
+                        Text("Save")
                     }
                 }
             }
         }
-        .alert(alertTitle, isPresented: $isShowingAlert) {
-            Button("OK", role: .cancel) { }
-        }
     }
     
     func add() {
-        let newItem = ToDoItem(context: moc)
-        newItem.id = UUID()
-        newItem.title = title
-        newItem.createdAt = Date()
-        newItem.priority = Priority.getPriority(from: priority)
-        newItem.state = .notStarted
-        
-        do {
-            try moc.save()
-            dismiss()
-        } catch {
-            displayAlert("There was a problem saving this ToDo")
-        }
-    }
-    
-    // TODO: Figure out how to reuse alerts with SwiftUI
-    func displayAlert(_ message: String) {
-        alertTitle = message
-        isShowingAlert = true
+        let priority = Priority(priorityValue) ?? .low
+        addTodoVM.add(title: title, priority: priority)
+                
+        dismiss()
     }
 }
 

@@ -1,5 +1,5 @@
 //
-//  ToDoItemsView.swift
+//  ToDoListView.swift
 //  ToDoList
 //
 //  Created by Caleb Lindsey on 1/21/22.
@@ -7,11 +7,8 @@
 
 import SwiftUI
 
-struct ToDoItemsView: View {
-    @Environment(\.managedObjectContext) var moc
-    @FetchRequest(sortDescriptors: [
-        SortDescriptor(\.createdAt)
-    ]) var toDoItems: FetchedResults<ToDoItem>
+struct ToDoListView: View {
+    @StateObject private var toDoListVM = ToDoListViewModel()
     
     @State private var isPresentingAddView = false
     @State private var isShowingAlert = false
@@ -21,14 +18,13 @@ struct ToDoItemsView: View {
         NavigationView {
             List {
                 Section {
-                    ForEach(toDoItems) { item in
+                    ForEach(toDoListVM.toDoItemViewModels) { item in
                         Text(item.title)
                     }
-                    .onDelete(perform: delete)
+                    .onDelete(perform: toDoListVM.delete)
                 } header: {
                     Text("Just do it")
                 }
-
             }
             .navigationTitle("ToDoList")
             .toolbar {
@@ -41,25 +37,15 @@ struct ToDoItemsView: View {
                 }
             }
             .sheet(isPresented: $isPresentingAddView) {
+                toDoListVM.fetchToDoItems()
+            } content: {
                 AddToDoItemView()
             }
         }
+        .onAppear(perform: toDoListVM.fetchToDoItems)
         .navigationViewStyle(.stack)
         .alert(alertTitle, isPresented: $isShowingAlert) {
             Button("OK", role: .cancel) { }
-        }
-    }
-    
-    func delete(at offsets: IndexSet) {
-        for offset in offsets {
-            let toDoItem = toDoItems[offset]
-            moc.delete(toDoItem)
-                        
-            do {
-                try moc.save()
-            } catch {
-                displayAlert("There was a problem deleting this ToDo")
-            }
         }
     }
     
@@ -72,6 +58,6 @@ struct ToDoItemsView: View {
 
 struct ToDoItemsView_Previews: PreviewProvider {
     static var previews: some View {
-        ToDoItemsView()
+        ToDoListView()
     }
 }
