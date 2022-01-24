@@ -10,6 +10,10 @@ import Foundation
 class ToDoListViewModel: ObservableObject {
     @Published var toDoItemViewModels: [ToDoItemViewModel] = []
     
+    var isEmpty: Bool {
+        return toDoItemViewModels.isEmpty
+    }
+    
     func fetchToDoItems(completion: ((Error?) -> ())?) {
         CoreDataManager.shared.fetchToDoItems(completion: { result in
             switch result {

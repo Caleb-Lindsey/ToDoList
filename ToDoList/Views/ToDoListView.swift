@@ -14,17 +14,27 @@ struct ToDoListView: View {
     
     var body: some View {
         NavigationView {
-            List {
-                Section {
-                    ForEach(toDoListVM.toDoItemViewModels) { itemViewModel in
-                        ToDoItemView(toDoItemViewModel: itemViewModel)
-                            .onTapGesture(count: 2) {
-                                itemViewModel.toggleState()
-                            }
+            Group {
+                if toDoListVM.isEmpty {
+                    VStack(alignment: .center) {
+                        EmptyDisplayView {
+                            isPresentingAddView.toggle()
+                        }
+                        Spacer()
                     }
-                    .onDelete(perform: toDoListVM.delete)
-                } header: {
-                    Text("Double-Tap to update progress")
+                } else {
+                    List {
+                        Section {
+                            ForEach(toDoListVM.toDoItemViewModels) { itemViewModel in
+                                ToDoItemView(toDoItemViewModel: itemViewModel) {
+                                    itemViewModel.toggleState()
+                                }
+                            }
+                            .onDelete(perform: toDoListVM.delete)
+                        } header: {
+                            Text("Double-Tap to update progress")
+                        }
+                    }
                 }
             }
             .navigationTitle("ToDoList")

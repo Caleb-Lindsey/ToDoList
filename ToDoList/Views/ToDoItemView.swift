@@ -10,6 +10,8 @@ import SwiftUI
 struct ToDoItemView: View {
     @ObservedObject var toDoItemViewModel: ToDoItemViewModel
     
+    var doubleTapAction: (() -> ())
+    
     private var stateColor: Color {
         switch toDoItemViewModel.state {
         case .notStarted:
@@ -33,6 +35,11 @@ struct ToDoItemView: View {
         }
     }
     
+    init(toDoItemViewModel: ToDoItemViewModel, doubleTapAction: @escaping (() -> ())) {
+        self.toDoItemViewModel = toDoItemViewModel
+        self.doubleTapAction = doubleTapAction
+    }
+    
     var body: some View {
         let state = toDoItemViewModel.state
         
@@ -48,14 +55,11 @@ struct ToDoItemView: View {
                     Spacer()
                 }
             }
+            .padding(.leading, 4)
             Spacer()
             priorityImage
         }
-    }
-}
-
-struct ToDoItemView_Previews: PreviewProvider {
-    static var previews: some View {
-        ToDoItemView(toDoItemViewModel: ToDoItemViewModel(toDoItem: ToDoItem.preview))
+        .contentShape(Rectangle())
+        .onTapGesture(count: 2, perform: doubleTapAction)
     }
 }
