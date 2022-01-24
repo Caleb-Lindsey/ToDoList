@@ -10,6 +10,29 @@ import SwiftUI
 struct ToDoItemView: View {
     @ObservedObject var toDoItemViewModel: ToDoItemViewModel
     
+    private var stateColor: Color {
+        switch toDoItemViewModel.state {
+        case .notStarted:
+            return .gray
+        case .inProgress:
+            return .yellow
+        case .done:
+            return .green
+        }
+    }
+    
+    @ViewBuilder
+    private var priorityImage: some View {
+        switch toDoItemViewModel.priority {
+        case .low:
+            EmptyView()
+        case .medium:
+            Image(systemName: "exclamationmark.2").foregroundColor(.orange)
+        case .high:
+            Image(systemName: "exclamationmark.3").foregroundColor(.red)
+        }
+    }
+    
     var body: some View {
         let state = toDoItemViewModel.state
         
@@ -20,38 +43,13 @@ struct ToDoItemView: View {
                 HStack {
                     Text(state.toString())
                         .font(.subheadline)
-                        .foregroundColor(getStateColor())
+                        .foregroundColor(stateColor)
+                        .fontWeight(.bold)
                     Spacer()
                 }
             }
             Spacer()
-            
-            let info = getPrioritySymbolInfo()
-            if let name = info.0, let color = info.1 {
-                Image(systemName: name).foregroundColor(color)
-            }
-        }
-    }
-    
-    private func getPrioritySymbolInfo() -> (String?, Color?) {
-        switch toDoItemViewModel.priority {
-        case .low:
-            return (nil, nil)
-        case .medium:
-            return ("exclamationmark.2", .orange)
-        case .high:
-            return ("exclamationmark.3", .red)
-        }
-    }
-    
-    private func getStateColor() -> Color {
-        switch toDoItemViewModel.state {
-        case .notStarted:
-            return .gray
-        case .inProgress:
-            return .yellow
-        case .done:
-            return .green
+            priorityImage
         }
     }
 }
