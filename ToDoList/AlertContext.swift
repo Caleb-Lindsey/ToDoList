@@ -21,7 +21,7 @@ enum AppAlert: AlertProvider {
         case .fetchToDoError:
             return Alert(title: Text("There was a problem loading your ToDos"))
         case .addToDoError:
-            return Alert(title: Text("There was a problem adding your ToDo"))
+            return Alert(title: Text("There was a problem adding your ToDo"), message: Text("Please make sure your ToDo is no longer than 50 characters and is not empty."))
         }
     }
 }

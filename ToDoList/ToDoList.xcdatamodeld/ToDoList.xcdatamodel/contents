@@ -5,7 +5,7 @@
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="priority" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="state" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="titleKey" attributeType="String"/>
+        <attribute name="titleKey" attributeType="String" regularExpressionString="^.{1,50}$"/>
     </entity>
     <elements>
         <element name="ToDoItem" positionX="-63" positionY="-18" width="128" height="104"/>
