@@ -12,6 +12,17 @@ import CoreData
     case notStarted = 0
     case inProgress = 1
     case done = 2
+    
+    func toString() -> String {
+        switch self {
+        case .notStarted:
+            return "Not Started"
+        case .inProgress:
+            return "In Progress"
+        case .done:
+            return "Done"
+        }
+    }
 }
 
 @objc enum Priority: Int32, CaseIterable {
@@ -74,4 +85,17 @@ class ToDoItem: NSManagedObject {
 
 extension ToDoItem : Identifiable {
     @NSManaged public var id: UUID?
+}
+
+// MARK: - Previews
+
+extension ToDoItem {
+    static let preview: ToDoItem = {
+        let toDoItem = ToDoItem()
+        toDoItem.id = UUID()
+        toDoItem.title = "Learn SwiftUI"
+        toDoItem.priority = .high
+        toDoItem.state = .done
+        return toDoItem
+    }()
 }

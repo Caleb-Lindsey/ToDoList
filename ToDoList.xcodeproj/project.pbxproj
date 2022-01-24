@@ -23,6 +23,7 @@
 		2E91F4D5279DE87B0095CAC9 /* AddToDoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E91F4D4279DE87B0095CAC9 /* AddToDoViewModel.swift */; };
 		2E91F4D7279DF7360095CAC9 /* AlertContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E91F4D6279DF7360095CAC9 /* AlertContext.swift */; };
 		2E91F4DA279E32CF0095CAC9 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E91F4D9279E32CF0095CAC9 /* View+Extensions.swift */; };
+		2E91F4DC279E3E690095CAC9 /* ToDoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E91F4DB279E3E680095CAC9 /* ToDoItemView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		2E91F4D4279DE87B0095CAC9 /* AddToDoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToDoViewModel.swift; sourceTree = "<group>"; };
 		2E91F4D6279DF7360095CAC9 /* AlertContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertContext.swift; sourceTree = "<group>"; };
 		2E91F4D9279E32CF0095CAC9 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
+		2E91F4DB279E3E680095CAC9 /* ToDoItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +158,7 @@
 			children = (
 				2E91F49A279BAC7E0095CAC9 /* ToDoListView.swift */,
 				2E91F4C7279CA0F50095CAC9 /* AddToDoItemView.swift */,
+				2E91F4DB279E3E680095CAC9 /* ToDoItemView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2E91F4D7279DF7360095CAC9 /* AlertContext.swift in Sources */,
+				2E91F4DC279E3E690095CAC9 /* ToDoItemView.swift in Sources */,
 				2E91F49B279BAC7E0095CAC9 /* ToDoListView.swift in Sources */,
 				2E91F4DA279E32CF0095CAC9 /* View+Extensions.swift in Sources */,
 				2E91F4D1279D111D0095CAC9 /* ToDoListViewModel.swift in Sources */,

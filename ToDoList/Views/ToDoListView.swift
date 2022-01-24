@@ -16,12 +16,15 @@ struct ToDoListView: View {
         NavigationView {
             List {
                 Section {
-                    ForEach(toDoListVM.toDoItemViewModels) { item in
-                        Text(item.title)
+                    ForEach(toDoListVM.toDoItemViewModels) { itemViewModel in
+                        ToDoItemView(toDoItemViewModel: itemViewModel)
+                            .onTapGesture(count: 2) {
+                                itemViewModel.toggleState()
+                            }
                     }
                     .onDelete(perform: toDoListVM.delete)
                 } header: {
-                    Text("Just do it")
+                    Text("Double-Tap to update progress")
                 }
             }
             .navigationTitle("ToDoList")

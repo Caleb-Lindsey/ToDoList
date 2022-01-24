@@ -51,7 +51,7 @@ struct AddToDoItemView: View {
         }
     }
     
-    func add() {
+    private func add() {
         let priority = Priority(priorityValue) ?? .low
         addToDoVM.add(title: title, priority: priority) { success in
             success ? dismiss() : alertContext.present(AppAlert.addToDoError)
