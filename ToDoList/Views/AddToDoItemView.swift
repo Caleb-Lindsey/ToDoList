@@ -14,7 +14,7 @@ struct AddToDoItemView: View {
     @State private var title = ""
     @State private var priorityValue = 0
     
-    private let addTodoVM = AddTodoViewModel()
+    private let addToDoVM = AddToDoViewModel()
     
     var body: some View {
         NavigationView {
@@ -53,7 +53,7 @@ struct AddToDoItemView: View {
     
     func add() {
         let priority = Priority(priorityValue) ?? .low
-        addTodoVM.add(title: title, priority: priority) { success in
+        addToDoVM.add(title: title, priority: priority) { success in
             success ? dismiss() : alertContext.present(AppAlert.addToDoError)
         }
     }

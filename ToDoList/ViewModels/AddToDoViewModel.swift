@@ -1,5 +1,5 @@
 //
-//  AddTodoViewModel.swift
+//  AddToDoViewModel.swift
 //  ToDoList
 //
 //  Created by Caleb Lindsey on 1/23/22.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AddTodoViewModel {
+struct AddToDoViewModel {
     func add(title: String, priority: Priority = .low, completion: ((Bool) -> ())?) {
         let newItem = ToDoItem(context: CoreDataManager.shared.viewContext)
         newItem.id = UUID()
