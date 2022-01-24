@@ -46,19 +46,6 @@ import CoreData
         
         self.init(rawValue: Int32(integer))
     }
-    
-    static func getPriority(from integer: Int) -> Priority {
-        switch integer {
-        case 0:
-            return .low
-        case 1:
-            return .medium
-        case 2:
-            return .high
-        default:
-            return .low
-        }
-    }
 }
 
 @objc(ToDoItem)
