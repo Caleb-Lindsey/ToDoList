@@ -9,10 +9,8 @@ import SwiftUI
 
 struct ToDoListView: View {
     @StateObject private var toDoListVM = ToDoListViewModel()
-    
+    @StateObject private var alertContext = AlertContext()
     @State private var isPresentingAddView = false
-    @State private var isShowingAlert = false
-    @State private var alertTitle = ""
     
     var body: some View {
         NavigationView {
@@ -36,23 +34,21 @@ struct ToDoListView: View {
                     }
                 }
             }
-            .sheet(isPresented: $isPresentingAddView) {
-                toDoListVM.fetchToDoItems()
-            } content: {
+            .sheet(isPresented: $isPresentingAddView, onDismiss: fetchToDoItems) {
                 AddToDoItemView()
             }
         }
-        .onAppear(perform: toDoListVM.fetchToDoItems)
         .navigationViewStyle(.stack)
-        .alert(alertTitle, isPresented: $isShowingAlert) {
-            Button("OK", role: .cancel) { }
-        }
+        .onAppear(perform: fetchToDoItems)
+        .alert(context: alertContext)
     }
     
-    // TODO: Figure out how to reuse alerts with SwiftUI
-    func displayAlert(_ message: String) {
-        alertTitle = message
-        isShowingAlert = true
+    func fetchToDoItems() {
+        toDoListVM.fetchToDoItems { error in
+            if error != nil {
+                alertContext.present(AppAlert.fetchToDoError)
+            }
+        }
     }
 }
 

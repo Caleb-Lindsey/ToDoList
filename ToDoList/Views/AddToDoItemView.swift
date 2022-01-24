@@ -10,6 +10,7 @@ import SwiftUI
 struct AddToDoItemView: View {
     @Environment(\.dismiss) var dismiss
     
+    @StateObject private var alertContext = AlertContext()
     @State private var title = ""
     @State private var priorityValue = 0
     
@@ -46,14 +47,15 @@ struct AddToDoItemView: View {
                     }
                 }
             }
+            .alert(context: alertContext)
         }
     }
     
     func add() {
         let priority = Priority(priorityValue) ?? .low
-        addTodoVM.add(title: title, priority: priority)
-                
-        dismiss()
+        addTodoVM.add(title: title, priority: priority) { success in
+            success ? dismiss() : alertContext.present(AppAlert.addToDoError)
+        }
     }
 }
 

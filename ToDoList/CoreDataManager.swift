@@ -25,31 +25,36 @@ class CoreDataManager {
         }
     }
     
-    func save() {
+    func save(completion: ((Bool) -> ())?) {
         do {
             try viewContext.save()
+            
+            completion?(true)
         } catch {
             viewContext.rollback()
+            
+            completion?(false)
             
             print(error.localizedDescription)
         }
     }
     
-    func fetchToDoItems() -> [ToDoItem] {
+    func fetchToDoItems(completion: ((Result<[ToDoItem], Error>) -> ())) {
         let request = ToDoItem.fetchRequest()
         
         do {
-            return try viewContext.fetch(request)
+            let toDoItems = try viewContext.fetch(request)
+            completion(.success(toDoItems))
         } catch {
             print(error.localizedDescription)
             
-            return []
+            completion(.failure(error))
         }
     }
     
     func delete(toDoItem: ToDoItem) {
         viewContext.delete(toDoItem)
         
-        save()
+        save(completion: nil)
     }
 }

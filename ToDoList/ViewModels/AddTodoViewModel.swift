@@ -8,7 +8,7 @@
 import Foundation
 
 struct AddTodoViewModel {
-    func add(title: String, priority: Priority = .low) {
+    func add(title: String, priority: Priority = .low, completion: ((Bool) -> ())?) {
         let newItem = ToDoItem(context: CoreDataManager.shared.viewContext)
         newItem.id = UUID()
         newItem.title = title
@@ -16,6 +16,6 @@ struct AddTodoViewModel {
         newItem.priority = priority
         newItem.state = .notStarted
         
-        CoreDataManager.shared.save()
+        CoreDataManager.shared.save(completion: completion)
     }
 }
