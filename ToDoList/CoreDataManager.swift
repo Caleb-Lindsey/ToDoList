@@ -25,6 +25,19 @@ class CoreDataManager {
         }
     }
     
+    // MARK: - Internal Methods
+    
+    func addToDo(title: String, priority: Priority = .low, state: ToDoState = .notStarted, completion: ((Bool) -> ())?) {
+        let newItem = ToDoItem(context: viewContext)
+        newItem.id = UUID()
+        newItem.title = title
+        newItem.createdAt = Date()
+        newItem.priority = priority
+        newItem.state = state
+        
+        CoreDataManager.shared.save(completion: completion)
+    }
+    
     func save(completion: ((Bool) -> ())?) {
         do {
             try viewContext.save()
