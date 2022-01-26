@@ -5,9 +5,11 @@
 //  Created by Caleb Lindsey on 1/23/22.
 //
 
+import Combine
 import Foundation
 
 class ToDoItemViewModel: ObservableObject, Identifiable {
+    private let coreDataManager = CoreDataManager.shared
     private(set) var toDoItem: ToDoItem
     
     var id: UUID?
@@ -18,7 +20,7 @@ class ToDoItemViewModel: ObservableObject, Identifiable {
         didSet {
             toDoItem.state = state
             
-            CoreDataManager.shared.save(completion: nil)
+            coreDataManager.updateState(for: toDoItem, newState: state)
         }
     }
     

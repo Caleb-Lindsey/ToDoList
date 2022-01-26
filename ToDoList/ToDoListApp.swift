@@ -27,8 +27,9 @@ struct ToDoListApp: App {
     }
     
     private func injectDefaultToDos() {
-        CoreDataManager.shared.addToDo(title: "Check Emails", completion: nil)
-        CoreDataManager.shared.addToDo(title: "Finish ToDoList App", priority: .high, state: .done, completion: nil)
-        CoreDataManager.shared.addToDo(title: "Learn SwiftUI", priority: .medium, state: .inProgress, completion: nil)
+        let coreDataManager = CoreDataManager.shared
+        coreDataManager.addToDo(title: "Check Emails", completion: nil)
+        coreDataManager.addToDo(title: "Finish ToDoList App", priority: .high, state: .done, completion: nil)
+        coreDataManager.addToDo(title: "Learn SwiftUI", priority: .medium, state: .inProgress, completion: nil)
     }
 }

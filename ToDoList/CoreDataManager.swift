@@ -8,66 +8,83 @@
 import CoreData
 import Foundation
 
-class CoreDataManager {
+class CoreDataManager: ObservableObject {
     static let shared = CoreDataManager()
     
-    private let container = NSPersistentContainer(name: "ToDoList")
+    private let container: NSPersistentContainer
     
-    var viewContext: NSManagedObjectContext {
-        return container.viewContext
-    }
+    @Published var savedToDoItems: [ToDoItem] = []
     
     private init() {
+        container = NSPersistentContainer(name: "ToDoList")
+        
+#if TESTING
+        // Allow inMemory store for Unit Tests
+        if let storeDescription = container.persistentStoreDescriptions.first {
+            storeDescription.url = URL(fileURLWithPath: "/dev/null")
+            storeDescription.shouldAddStoreAsynchronously = false
+        }
+#endif
+        
         container.loadPersistentStores { _, error in
             if let error = error {
                 fatalError("Core Data failed to load: \(error.localizedDescription)")
             }
         }
+        
+        getToDoItems()
+    }
+    
+    // MARK: - Private Methods
+    
+    private func getToDoItems() {
+        let request = ToDoItem.fetchRequest()
+        
+        do {
+            savedToDoItems = try container.viewContext.fetch(request)
+        } catch {
+            print("Problem fetching ToDos: \(error)")
+        }
     }
     
     // MARK: - Internal Methods
     
+    func save(completion: ((Bool) -> ())?) {
+        do {
+            try container.viewContext.save()
+            
+            getToDoItems()
+
+            completion?(true)
+        } catch {
+            container.viewContext.rollback()
+
+            completion?(false)
+        }
+    }
+    
     func addToDo(title: String, priority: Priority = .low, state: ToDoState = .notStarted, completion: ((Bool) -> ())?) {
-        let newItem = ToDoItem(context: viewContext)
+        let newItem = ToDoItem(context: container.viewContext)
         newItem.id = UUID()
         newItem.title = title
         newItem.createdAt = Date()
         newItem.priority = priority
         newItem.state = state
+
+        save(completion: completion)
+    }
+    
+    func updateState(for toDoItem: ToDoItem, newState: ToDoState) {
+        guard let toDoItem = (savedToDoItems.first { $0.id == toDoItem.id }) else { return }
         
-        CoreDataManager.shared.save(completion: completion)
-    }
-    
-    func save(completion: ((Bool) -> ())?) {
-        do {
-            try viewContext.save()
-            
-            completion?(true)
-        } catch {
-            viewContext.rollback()
-            
-            completion?(false)
-            
-            print(error.localizedDescription)
-        }
-    }
-    
-    func fetchToDoItems(completion: ((Result<[ToDoItem], Error>) -> ())) {
-        let request = ToDoItem.fetchRequest()
+        toDoItem.state = newState
         
-        do {
-            let toDoItems = try viewContext.fetch(request)
-            completion(.success(toDoItems))
-        } catch {
-            print(error.localizedDescription)
-            
-            completion(.failure(error))
-        }
+        save(completion: nil)
     }
-    
+
     func delete(toDoItem: ToDoItem) {
-        viewContext.delete(toDoItem)
-        
+        container.viewContext.delete(toDoItem)
+
         save(completion: nil)
     }
 }

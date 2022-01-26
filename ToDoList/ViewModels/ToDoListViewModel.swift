@@ -5,35 +5,30 @@
 //  Created by Caleb Lindsey on 1/22/22.
 //
 
+import Combine
 import Foundation
 
 class ToDoListViewModel: ObservableObject {
-    @Published var toDoItemViewModels: [ToDoItemViewModel] = []
+    private let coreDataManager = CoreDataManager.shared
+    private var cancellables = Set<AnyCancellable>()
+    
+    @Published private(set) var toDoItemViewModels: [ToDoItemViewModel] = []
     
     var isEmpty: Bool {
         return toDoItemViewModels.isEmpty
     }
     
-    func fetchToDoItems(completion: ((Error?) -> ())?) {
-        CoreDataManager.shared.fetchToDoItems(completion: { result in
-            switch result {
-            case .success(let toDoItems):
-                toDoItemViewModels = toDoItems.map(ToDoItemViewModel.init)
-                
-                completion?(nil)
-            case .failure(let error):
-                completion?(error)
-            }
-        })
+    init() {
+        coreDataManager.$savedToDoItems
+        .sink { [weak self] (toDoItems) in
+            self?.toDoItemViewModels = toDoItems.map(ToDoItemViewModel.init)
+        } .store(in: &cancellables)
     }
     
     func delete(at offsets: IndexSet) {
         for offset in offsets {
-            let toDoItemViewModel = toDoItemViewModels[offset]
-            toDoItemViewModels.remove(at: offset)
-
-            let toDoItem = toDoItemViewModel.toDoItem
-            CoreDataManager.shared.delete(toDoItem: toDoItem)
+            let toDoItem = toDoItemViewModels[offset].toDoItem
+            coreDataManager.delete(toDoItem: toDoItem)
         }
     }
 }

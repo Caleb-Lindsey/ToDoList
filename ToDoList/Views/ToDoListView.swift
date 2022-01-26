@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ToDoListView: View {
     @StateObject private var toDoListVM = ToDoListViewModel()
-    @StateObject private var alertContext = AlertContext()
     @State private var isPresentingAddView = false
     
     var body: some View {
@@ -47,21 +46,11 @@ struct ToDoListView: View {
                     }
                 }
             }
-            .sheet(isPresented: $isPresentingAddView, onDismiss: fetchToDoItems) {
+            .sheet(isPresented: $isPresentingAddView) {
                 AddToDoItemView()
             }
         }
         .navigationViewStyle(.stack)
-        .onAppear(perform: fetchToDoItems)
-        .alert(context: alertContext)
-    }
-    
-    func fetchToDoItems() {
-        toDoListVM.fetchToDoItems { error in
-            if error != nil {
-                alertContext.present(AppAlert.fetchToDoError)
-            }
-        }
     }
 }
 
