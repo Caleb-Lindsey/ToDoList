@@ -10,7 +10,7 @@ import SwiftUI
 struct ToDoItemView: View {
     @ObservedObject var toDoItemViewModel: ToDoItemViewModel
     
-    var doubleTapAction: (() -> ())
+    var doubleTapAction: (() -> Void)
     
     private var stateColor: Color {
         switch toDoItemViewModel.state {
@@ -35,7 +35,7 @@ struct ToDoItemView: View {
         }
     }
     
-    init(toDoItemViewModel: ToDoItemViewModel, doubleTapAction: @escaping (() -> ())) {
+    init(toDoItemViewModel: ToDoItemViewModel, doubleTapAction: @escaping (() -> Void)) {
         self.toDoItemViewModel = toDoItemViewModel
         self.doubleTapAction = doubleTapAction
     }

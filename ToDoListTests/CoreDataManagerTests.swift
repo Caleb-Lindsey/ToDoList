@@ -15,7 +15,7 @@ class CoreDataManagerTests: XCTestCase {
     private var cancellables = Set<AnyCancellable>()
         
     override func setUp() {
-        if toDoItems.count == 0 {
+        if toDoItems.isEmpty {
             coreDataManager.addToDo(title: "someTitle1", priority: .low, state: .notStarted) { success in
                 XCTAssertTrue(success)
             }

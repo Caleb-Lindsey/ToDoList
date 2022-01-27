@@ -37,13 +37,10 @@ class ToDoItemViewModel: ObservableObject, Identifiable {
         switch state {
         case .notStarted:
             state = .inProgress
-            break
         case .inProgress:
             state = .done
-            break
         case .done:
             state = .notStarted
-            break
         }
     }
 }

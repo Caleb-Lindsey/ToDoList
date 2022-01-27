@@ -18,7 +18,8 @@ enum AppAlert: AlertProvider {
     var alert: Alert {
         switch self {
         case .addToDoError:
-            return Alert(title: Text("There was a problem adding your ToDo"), message: Text("Please make sure your ToDo is no longer than 50 characters and is not empty."))
+            return Alert(title: Text("There was a problem adding your ToDo"),
+                         message: Text("Please make sure your ToDo is no longer than 50 characters and is not empty."))
         }
     }
 }

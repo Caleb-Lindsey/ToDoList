@@ -19,8 +19,8 @@ class ToDoItem: NSManagedObject {
     @NSManaged var priority: ToDoPriority
     
     var title: String {
-        set { titleKey = newValue }
         get { return titleKey ?? "Unknown" }
+        set { titleKey = newValue }
     }
     
     @nonobjc class func fetchRequest() -> NSFetchRequest<ToDoItem> {
@@ -30,6 +30,6 @@ class ToDoItem: NSManagedObject {
 
 // MARK: - Identifiable
 
-extension ToDoItem : Identifiable {
+extension ToDoItem: Identifiable {
     @NSManaged public var id: UUID?
 }

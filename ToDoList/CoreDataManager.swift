@@ -49,7 +49,7 @@ class CoreDataManager: ObservableObject {
     
     // MARK: - Internal Methods
     
-    func save(completion: ((Bool) -> ())?) {
+    func save(completion: ((Bool) -> Void)?) {
         do {
             try container.viewContext.save()
             
@@ -63,7 +63,7 @@ class CoreDataManager: ObservableObject {
         }
     }
     
-    func addToDo(title: String, priority: ToDoPriority = .low, state: ToDoState = .notStarted, completion: ((Bool) -> ())?) {
+    func addToDo(title: String, priority: ToDoPriority = .low, state: ToDoState = .notStarted, completion: ((Bool) -> Void)?) {
         let newItem = ToDoItem(context: container.viewContext)
         newItem.id = UUID()
         newItem.title = title

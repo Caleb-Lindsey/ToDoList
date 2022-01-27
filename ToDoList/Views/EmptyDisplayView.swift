@@ -10,9 +10,9 @@ import SwiftUI
 struct EmptyDisplayView: View {
     let gradient = LinearGradient(gradient: Gradient(colors: [Color.cyan, Color.green]), startPoint: .topLeading, endPoint: .bottomTrailing)
     
-    var action: (() -> ())
+    var action: (() -> Void)
     
-    init(action: (@escaping () -> ())) {
+    init(action: (@escaping () -> Void)) {
         self.action = action
     }
     

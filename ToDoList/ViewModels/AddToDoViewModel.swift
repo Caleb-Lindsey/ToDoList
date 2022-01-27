@@ -10,7 +10,7 @@ import Foundation
 class AddToDoViewModel {
     private let coreDataManager = CoreDataManager.shared
     
-    func add(title: String, priority: ToDoPriority = .low, completion: ((Bool) -> ())?) {
+    func add(title: String, priority: ToDoPriority = .low, completion: ((Bool) -> Void)?) {
         coreDataManager.addToDo(title: title, priority: priority, completion: completion)
     }
 }
