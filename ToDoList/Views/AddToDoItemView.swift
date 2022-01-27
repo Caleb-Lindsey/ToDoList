@@ -25,8 +25,8 @@ struct AddToDoItemView: View {
                 
                 Section {
                     Picker("Priority", selection: $priorityValue) {
-                        ForEach(0..<Priority.allCases.count) { index in
-                            Text(Priority.allCases[index].title)
+                        ForEach(0..<ToDoPriority.allCases.count) { index in
+                            Text(ToDoPriority.allCases[index].title)
                         }
                     }
                     .pickerStyle(.segmented)
@@ -52,7 +52,7 @@ struct AddToDoItemView: View {
     }
     
     private func add() {
-        let priority = Priority(priorityValue) ?? .low
+        let priority = ToDoPriority(priorityValue) ?? .low
         addToDoVM.add(title: title, priority: priority) { success in
             success ? dismiss() : alertContext.present(AppAlert.addToDoError)
         }

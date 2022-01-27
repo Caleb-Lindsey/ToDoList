@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2E461957279EF370007FF37A /* ToDoItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E461956279EF370007FF37A /* ToDoItemTests.swift */; };
-		2E461958279EF3C2007FF37A /* ToDoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E91F4CA279CF7F30095CAC9 /* ToDoItem.swift */; };
-		2E461959279EF5DF007FF37A /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E91F4C5279C924E0095CAC9 /* CoreDataManager.swift */; };
+		2E0D5C4527A222BB00A009E9 /* CoreDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0D5C4427A222BB00A009E9 /* CoreDataManagerTests.swift */; };
+		2E0D5C4827A2346200A009E9 /* ToDoState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0D5C4727A2346200A009E9 /* ToDoState.swift */; };
+		2E0D5C4B27A234DD00A009E9 /* ToDoPriority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0D5C4A27A234DD00A009E9 /* ToDoPriority.swift */; };
+		2E0D5C5027A23F3300A009E9 /* ToDoPriorityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0D5C4F27A23F3300A009E9 /* ToDoPriorityTests.swift */; };
+		2E461957279EF370007FF37A /* ToDoStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E461956279EF370007FF37A /* ToDoStateTests.swift */; };
 		2E46195D279F2709007FF37A /* EmptyDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E46195C279F2708007FF37A /* EmptyDisplayView.swift */; };
 		2E91F499279BAC7E0095CAC9 /* ToDoListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E91F498279BAC7E0095CAC9 /* ToDoListApp.swift */; };
 		2E91F49B279BAC7E0095CAC9 /* ToDoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E91F49A279BAC7E0095CAC9 /* ToDoListView.swift */; };
@@ -47,7 +49,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2E461956279EF370007FF37A /* ToDoItemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItemTests.swift; sourceTree = "<group>"; };
+		2E0D5C4427A222BB00A009E9 /* CoreDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerTests.swift; sourceTree = "<group>"; };
+		2E0D5C4727A2346200A009E9 /* ToDoState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoState.swift; sourceTree = "<group>"; };
+		2E0D5C4A27A234DD00A009E9 /* ToDoPriority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoPriority.swift; sourceTree = "<group>"; };
+		2E0D5C4F27A23F3300A009E9 /* ToDoPriorityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoPriorityTests.swift; sourceTree = "<group>"; };
+		2E461956279EF370007FF37A /* ToDoStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoStateTests.swift; sourceTree = "<group>"; };
 		2E46195C279F2708007FF37A /* EmptyDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyDisplayView.swift; sourceTree = "<group>"; };
 		2E91F495279BAC7E0095CAC9 /* ToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E91F498279BAC7E0095CAC9 /* ToDoListApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListApp.swift; sourceTree = "<group>"; };
@@ -95,6 +101,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2E0D5C4E27A23E4900A009E9 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				2E0D5C4727A2346200A009E9 /* ToDoState.swift */,
+				2E0D5C4A27A234DD00A009E9 /* ToDoPriority.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		2E0D5C5227A2414F00A009E9 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				2E461956279EF370007FF37A /* ToDoStateTests.swift */,
+				2E0D5C4F27A23F3300A009E9 /* ToDoPriorityTests.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
 		2E91F48C279BAC7E0095CAC9 = {
 			isa = PBXGroup;
 			children = (
@@ -119,14 +143,15 @@
 			isa = PBXGroup;
 			children = (
 				2E91F498279BAC7E0095CAC9 /* ToDoListApp.swift */,
+				2E91F4C5279C924E0095CAC9 /* CoreDataManager.swift */,
 				2E91F4CE279CFF970095CAC9 /* Models */,
 				2E91F4CF279D10C30095CAC9 /* ViewModels */,
 				2E91F4C9279CADB90095CAC9 /* Views */,
+				2E0D5C4E27A23E4900A009E9 /* Enums */,
 				2E91F4D8279E32870095CAC9 /* Extensions */,
 				2E91F49C279BAC7F0095CAC9 /* Assets.xcassets */,
 				2E91F49E279BAC7F0095CAC9 /* Preview Content */,
 				2E91F4C2279C8F7E0095CAC9 /* ToDoList.xcdatamodeld */,
-				2E91F4C5279C924E0095CAC9 /* CoreDataManager.swift */,
 				2E91F4D6279DF7360095CAC9 /* AlertContext.swift */,
 			);
 			path = ToDoList;
@@ -143,7 +168,8 @@
 		2E91F4A8279BAC800095CAC9 /* ToDoListTests */ = {
 			isa = PBXGroup;
 			children = (
-				2E461956279EF370007FF37A /* ToDoItemTests.swift */,
+				2E0D5C4427A222BB00A009E9 /* CoreDataManagerTests.swift */,
+				2E0D5C5227A2414F00A009E9 /* Enums */,
 			);
 			path = ToDoListTests;
 			sourceTree = "<group>";
@@ -326,6 +352,7 @@
 			files = (
 				2E91F4D7279DF7360095CAC9 /* AlertContext.swift in Sources */,
 				2E91F4DC279E3E690095CAC9 /* ToDoItemView.swift in Sources */,
+				2E0D5C4B27A234DD00A009E9 /* ToDoPriority.swift in Sources */,
 				2E91F49B279BAC7E0095CAC9 /* ToDoListView.swift in Sources */,
 				2E91F4DA279E32CF0095CAC9 /* View+Extensions.swift in Sources */,
 				2E91F4D1279D111D0095CAC9 /* ToDoListViewModel.swift in Sources */,
@@ -335,6 +362,7 @@
 				2E91F4C8279CA0F50095CAC9 /* AddToDoItemView.swift in Sources */,
 				2E91F4CC279CF7F30095CAC9 /* ToDoItem.swift in Sources */,
 				2E91F4D5279DE87B0095CAC9 /* AddToDoViewModel.swift in Sources */,
+				2E0D5C4827A2346200A009E9 /* ToDoState.swift in Sources */,
 				2E91F499279BAC7E0095CAC9 /* ToDoListApp.swift in Sources */,
 				2E46195D279F2709007FF37A /* EmptyDisplayView.swift in Sources */,
 			);
@@ -344,9 +372,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E461957279EF370007FF37A /* ToDoItemTests.swift in Sources */,
-				2E461959279EF5DF007FF37A /* CoreDataManager.swift in Sources */,
-				2E461958279EF3C2007FF37A /* ToDoItem.swift in Sources */,
+				2E461957279EF370007FF37A /* ToDoStateTests.swift in Sources */,
+				2E0D5C4527A222BB00A009E9 /* CoreDataManagerTests.swift in Sources */,
+				2E0D5C5027A23F3300A009E9 /* ToDoPriorityTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

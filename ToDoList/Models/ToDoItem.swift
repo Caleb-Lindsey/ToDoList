@@ -8,46 +8,6 @@
 import Foundation
 import CoreData
 
-@objc enum ToDoState: Int32 {
-    case notStarted = 0
-    case inProgress = 1
-    case done = 2
-    
-    func toString() -> String {
-        switch self {
-        case .notStarted:
-            return "Not Started"
-        case .inProgress:
-            return "In Progress"
-        case .done:
-            return "Done"
-        }
-    }
-}
-
-@objc enum Priority: Int32, CaseIterable {
-    case low = 0
-    case medium = 1
-    case high = 2
-    
-    var title: String {
-        switch self {
-        case .low:
-            return "Low"
-        case .medium:
-            return "Medium"
-        case .high:
-            return "High"
-        }
-    }
-    
-    init?(_ integer: Int) {
-        guard 0..<Priority.allCases.count ~= integer else { return nil }
-        
-        self.init(rawValue: Int32(integer))
-    }
-}
-
 @objc(ToDoItem)
 class ToDoItem: NSManagedObject {
     @NSManaged private var titleKey: String?
@@ -56,7 +16,7 @@ class ToDoItem: NSManagedObject {
     
     @NSManaged var state: ToDoState
     
-    @NSManaged var priority: Priority
+    @NSManaged var priority: ToDoPriority
     
     var title: String {
         set { titleKey = newValue }
@@ -72,17 +32,4 @@ class ToDoItem: NSManagedObject {
 
 extension ToDoItem : Identifiable {
     @NSManaged public var id: UUID?
-}
-
-// MARK: - Previews
-
-extension ToDoItem {
-    static let preview: ToDoItem = {
-        let toDoItem = ToDoItem()
-        toDoItem.id = UUID()
-        toDoItem.title = "Learn SwiftUI"
-        toDoItem.priority = .high
-        toDoItem.state = .done
-        return toDoItem
-    }()
 }

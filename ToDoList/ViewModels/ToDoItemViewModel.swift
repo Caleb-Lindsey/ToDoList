@@ -14,7 +14,7 @@ class ToDoItemViewModel: ObservableObject, Identifiable {
     
     var id: UUID?
     var title: String
-    var priority: Priority
+    var priority: ToDoPriority
     
     @Published var state: ToDoState {
         didSet {

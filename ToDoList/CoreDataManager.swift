@@ -9,10 +9,10 @@ import CoreData
 import Foundation
 
 class CoreDataManager: ObservableObject {
+    // TODO: Learn more Combine and get rid of singleton
     static let shared = CoreDataManager()
     
     private let container: NSPersistentContainer
-    
     @Published var savedToDoItems: [ToDoItem] = []
     
     private init() {
@@ -63,7 +63,7 @@ class CoreDataManager: ObservableObject {
         }
     }
     
-    func addToDo(title: String, priority: Priority = .low, state: ToDoState = .notStarted, completion: ((Bool) -> ())?) {
+    func addToDo(title: String, priority: ToDoPriority = .low, state: ToDoState = .notStarted, completion: ((Bool) -> ())?) {
         let newItem = ToDoItem(context: container.viewContext)
         newItem.id = UUID()
         newItem.title = title
